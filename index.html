@@ -1,171 +1,167 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="0; url=steam://connect/209.222.97.134:27017">
-    <!DOCTYPE html>
-<html lang="ar">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Server GMod [AM4] ZSurvival+Bots  (USA)</title>
+    <title>GMod [AM4] ZS (USA)</title>
     <style>
-        /* إعدادات سهلة التعديل */
+        /* 🎨 تخصيص الألوان والتأثيرات */
         :root {
-            --background-color: #0d0d0d; /* لون الخلفية الداكن */
-            --button-color: #ff6600; /* لون الأزرار */
-            --button-hover-color: #ff4500; /* لون الأزرار عند المرور */
-            --text-color: white; /* لون النص */
+            --background-gradient: linear-gradient(45deg, #ff0000, #ff7300, #ffcc00, #00ffcc, #0044ff, #cc00ff);
+            --button-bg: rgba(0, 0, 0, 0.9);
+            --button-hover: #ffcc00;
+            --text-color: white;
+            --glow-color: rgba(255, 204, 0, 0.9);
+            --title-bg: rgba(0, 0, 0, 0.8);
         }
 
-        /* تصميم الخلفية مع تأثير الإضاءة المتحركة */
+        /* 🌌 الخلفية المتحركة */
         body {
-            background: var(--background-color);
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             text-align: center;
             color: var(--text-color);
             margin: 0;
-            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            flex-direction: column;
             position: relative;
             overflow: hidden;
+            background: black;
         }
 
-        /* تأثير الضوء النابض للخلفية */
-        body::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 100, 0, 0.3), transparent);
-            animation: backgroundPulse 6s infinite alternate ease-in-out;
+        /* 🌈 تأثير الخلفية المتحركة */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--background-gradient);
+            background-size: 400% 400%;
+            animation: backgroundMove 8s infinite alternate ease-in-out;
+            filter: blur(50px);
+            z-index: -1;
         }
 
-        @keyframes backgroundPulse {
-            0% { transform: rotate(0deg) scale(1); }
-            100% { transform: rotate(360deg) scale(1.2); }
+        @keyframes backgroundMove {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
 
-        /* تحسينات على العنوان */
+        /* 🔥 تحسين العنوان */
+        .title-container {
+            background: var(--title-bg);
+            padding: -20px 10px;
+            border-radius: 30px;
+            box-shadow: 0px 0px 15px var(--glow-color);
+            animation: fadeIn 1s ease-in-out, pulseGlow 2s infinite alternate;
+            z-index: 2;
+            margin-bottom: 40px;
+        }
+
         h1 {
-            margin-top: 50px;
-            font-size: 36px;
-            text-shadow: 0 0 15px rgba(255, 100, 0, 0.8);
-            opacity: 0;
-            animation: fadeIn 1.5s forwards, textGlow 1.5s infinite alternate;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 10px black, 0 0 20px var(--glow-color);
+            -webkit-text-stroke: 1px black;
+            color: white;
+            animation: waveText 3s infinite alternate ease-in-out;
         }
 
-        /* تأثير وميض كهربائي على العنوان */
-        @keyframes textGlow {
-            0% { text-shadow: 0 0 15px rgba(255, 100, 0, 1); }
-            100% { text-shadow: 0 0 30px rgba(255, 69, 0, 1); }
+        @keyframes waveText {
+            0% { transform: scale(0.88); }
+            100% { transform: scale(0.98); }
         }
 
-        /* تأثير ظهور النص */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* 🔘 تصميم الأزرار */
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: -10px;
+            z-index: 2;
         }
 
-        /* تحسينات الأزرار ثلاثية الأبعاد */
-        .button {
+        .btn {
             display: block;
             width: 300px;
-            margin: 20px auto;
             padding: 15px;
-            font-size: 20px;
-            color: white;
-            background: linear-gradient(145deg, #646464, #1464C8);
-            border: none;
-            border-radius: 15px;
+            margin: 10px 0; /* وضع مسافة بين الأزرار */
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--text-color);
+            background: var(--button-bg);
+            border: 2px solid var(--button-hover);
+            border-radius: 10px;
             cursor: pointer;
-            transition: all 0.2s ease-in-out;
             text-decoration: none;
-            text-align: center;
-            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.8), inset -2px -2px 5px rgba(255, 255, 255, 0.3);
-            position: relative;
-            transform: perspective(500px) rotateX(10deg);
-            animation: fadeInButtons 1s forwards 2s;
+            text-transform: uppercase;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0px 0px 15px var(--glow-color);
         }
 
-        /* تأثير ظهور الأزرار */
-        @keyframes fadeInButtons {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .btn:hover {
+            background: var(--button-hover);
+            color: black;
+            box-shadow: 0px 0px 30px var(--glow-color);
+            transform: scale(1.1);
+        }
+        
+        /* 📢 تصميم رسالة التحميل */
+        .loading-message {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 3;
+            transform: translate(0%, 60%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 40px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px var(--glow-color);
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out;
         }
 
-        /* تأثير توهج للأزرار عند المرور */
-        .button:hover {
-            background: linear-gradient(145deg, #ff6600, #0064C8);
-            transform: perspective(500px) rotateX(5deg) scale(1.05);
-            box-shadow: 0px 0px 20px rgba(255, 255, 255, 1);
+        .hidden {
+            opacity: 0;
+            visibility: hidden;
         }
 
-        /* تأثير عند الضغط */
-        .button:active {
-            transform: perspective(500px) rotateX(0deg) scale(0.98);
-        }
     </style>
 </head>
 <body>
-    <h1>Join a server GMod [AM4] ZSurvival+Bots (USA)</h1>
-    <p id="loading-text">You are now automatically directed to the server...</p>
 
-    <!-- أزرار التفاعل ثلاثية الأبعاد -->
-    <a href="steam://connect/209.222.97.134:27017" class="button" onmouseenter="playHoverSound()" onclick="playClickSound()">🔄 Try again to join the server</a>
-    <a href="https://discord.gg/sCM7H5gw" class="button" onmouseenter="playHoverSound()" onclick="playClickSound()">💬 Join Discord</a>
-    <a href="https://youtube.com/channel/UCmLCJ5A_G2ziKU4ZIVryUng" class="button" onmouseenter="playHoverSound()" onclick="playClickSound()">📺 My Youtube</a>
+    <div class="animated-bg"></div> <!-- 🔥 خلفية متحركة نيون -->
 
+    <div class="title-container">
+        <h1>Server GMod [AM4] ZSurvival+Bots (USA)</h1>
+    </div>
+
+    <div class="btn-container">
+        <a class="btn" href="steam://connect/209.222.97.134:27017">🔄 Try joining</a>
+        <a class="btn" href="https://discord.gg/sCM7H5gw" target="_blank">▶ Discord</a>
+        <a class="btn" href="https://www.youtube.com/channel/UCmLCJ5A_G2ziKU4ZIVryUng" target="_blank">▶ Youtube</a>
+        <a class="btn" href="https://space.bilibili.com/3493137955687196" target="_blank">▶ bilibili</a>
+    </div>
+    
+    <!-- 📢 رسالة التحميل -->
+    <div id="loading-message" class="loading-message">Joining server automatically...</div>
+    
     <script>
-        let audioContext;
-        
-        function initAudio() {
-            if (!audioContext) {
-                audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            }
-        }
+        // 🚀 إظهار رسالة التحميل ثم إخفاؤها بعد 3 ثوانٍ
+        setTimeout(() => {
+            document.getElementById("loading-message").classList.add("hidden");
+        }, 15000);
 
-        function playSound(frequency, duration) {
-            initAudio();
-            let oscillator = audioContext.createOscillator();
-            let gainNode = audioContext.createGain();
-
-            oscillator.type = "sine";
-            oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
-            gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
-
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
-
-            oscillator.start();
-            oscillator.stop(audioContext.currentTime + duration);
-        }
-
-        function playHoverSound() {
-            playSound(700, 0.05); // صوت خفيف عند تمرير الماوس
-        }
-
-        function playClickSound() {
-            playSound(300, 0.1); // صوت أعمق عند الضغط
-        }
-
-        // إعادة توجيه تلقائي إلى خادم GMod بعد 3 ثوانٍ
-        setTimeout(function() {
+        // 🔗 إعادة التوجيه إلى خادم GMod بعد 3 ثوانٍ
+        setTimeout(() => {
             window.location.href = "steam://connect/209.222.97.134:27017";
-        }, 3000);
-
-        // إظهار النص بسلاسة
-        setTimeout(function() {
-            document.getElementById("loading-text").style.opacity = "1";
-        }, 500);
-
-        // إخفاء النص بعد 3 ثوانٍ بسلاسة
-        setTimeout(function() {
-            document.getElementById("loading-text").style.transition = "opacity 1s ease-in-out";
-            document.getElementById("loading-text").style.opacity = "0";
-        }, 3000);
+        }, 1000);
     </script>
+
 </body>
 </html>
