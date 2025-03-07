@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join a server GMod [AM4] ZSurvival+Bots (USA)</title>
+    <style>
+        /* إعدادات سهلة التعديل */
+        :root {
+            --background-color: #0d0d0d; /* لون الخلفية الداكن */
+            --button-color: #ff6600; /* لون الأزرار */
+            --button-hover-color: #ff4500; /* لون الأزرار عند المرور */
+            --text-color: white; /* لون النص */
+        }
+
+        /* تصميم الخلفية مع تأثير الإضاءة المتحركة */
+        body {
+            background: var(--background-color);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* تأثير الضوء النابض للخلفية */
+        body::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 100, 0, 0.3), transparent);
+            animation: backgroundPulse 6s infinite alternate ease-in-out;
+        }
+
+        @keyframes backgroundPulse {
+            0% { transform: rotate(0deg) scale(1); }
+            100% { transform: rotate(360deg) scale(1.2); }
+        }
+
+        /* تحسينات على العنوان */
+        h1 {
+            margin-top: 50px;
+            font-size: 36px;
+            text-shadow: 0 0 15px rgba(255, 100, 0, 0.8);
+            opacity: 0;
+            animation: fadeIn 1.5s forwards, textGlow 1.5s infinite alternate;
+        }
+
+        /* تأثير وميض كهربائي على العنوان */
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 15px rgba(255, 100, 0, 1); }
+            100% { text-shadow: 0 0 30px rgba(255, 69, 0, 1); }
+        }
+
+        /* تأثير ظهور النص */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* تحسينات الأزرار ثلاثية الأبعاد */
+        .button {
+            display: block;
+            width: 300px;
+            margin: 20px auto;
+            padding: 15px;
+            font-size: 20px;
+            color: white;
+            background: linear-gradient(145deg, #ff6600, #cc5200);
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            text-decoration: none;
+            text-align: center;
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.8), inset -2px -2px 5px rgba(255, 255, 255, 0.3);
+            position: relative;
+            transform: perspective(500px) rotateX(10deg);
+            animation: fadeInButtons 1s forwards 2s;
+        }
+
+        /* تأثير ظهور الأزرار */
+        @keyframes fadeInButtons {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* تأثير توهج للأزرار عند المرور */
+        .button:hover {
+            background: linear-gradient(145deg, #ff4500, #cc3300);
+            transform: perspective(500px) rotateX(5deg) scale(1.05);
+            box-shadow: 0px 0px 20px rgba(255, 69, 0, 0.8);
+        }
+
+        /* تأثير عند الضغط */
+        .button:active {
+            transform: perspective(500px) rotateX(0deg) scale(0.98);
+        }
+    </style>
+</head>
+<body>
+    <h1>Join a server GMod [AM4] ZSurvival+Bots (USA)</h1>
+    <p id="loading-text">يتم الآن توجيهك تلقائيًا إلى الخادم...</p>
+
+    <!-- أزرار التفاعل ثلاثية الأبعاد -->
+    <a href="steam://connect/209.222.97.134:27017" class="button" onmouseenter="playHoverSound()" onclick="playClickSound()">🔄 إعادة المحاولة للانضمام للخادم</a>
+    <a href="https://discord.gg/your-discord-link" class="button" onmouseenter="playHoverSound()" onclick="playClickSound()">💬 انضم إلى Discord</a>
+    <a href="https://youtube.com/your-channel-link" class="button" onmouseenter="playHoverSound()" onclick="playClickSound()">📺 اشترك في قناتي</a>
+
+    <script>
+        let audioContext;
+        
+        function initAudio() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        function playSound(frequency, duration) {
+            initAudio();
+            let oscillator = audioContext.createOscillator();
+            let gainNode = audioContext.createGain();
+
+            oscillator.type = "sine";
+            oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+            gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            oscillator.start();
+            oscillator.stop(audioContext.currentTime + duration);
+        }
+
+        function playHoverSound() {
+            playSound(700, 0.05); // صوت خفيف عند تمرير الماوس
+        }
+
+        function playClickSound() {
+            playSound(300, 0.1); // صوت أعمق عند الضغط
+        }
+
+        // إعادة توجيه تلقائي إلى خادم GMod بعد 3 ثوانٍ
+        setTimeout(function() {
+            window.location.href = "steam://connect/209.222.97.134:27017";
+        }, 3000);
+
+        // إظهار النص بسلاسة
+        setTimeout(function() {
+            document.getElementById("loading-text").style.opacity = "1";
+        }, 500);
+
+        // إخفاء النص بعد 3 ثوانٍ بسلاسة
+        setTimeout(function() {
+            document.getElementById("loading-text").style.transition = "opacity 1s ease-in-out";
+            document.getElementById("loading-text").style.opacity = "0";
+        }, 3000);
+    </script>
+</body>
+</html>
