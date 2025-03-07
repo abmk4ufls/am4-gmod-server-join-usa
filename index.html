@@ -122,13 +122,17 @@
             font-weight: bold;
             border-radius: 10px;
             box-shadow: 0px 0px 15px var(--glow-color);
-            opacity: 1;
-            transition: opacity 0.5s ease-in-out;
-        }
-
-        .hidden {
             opacity: 0;
             visibility: hidden;
+            transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .visible {
+            opacity: 1;
+            visibility: visible;
         }
 
     </style>
@@ -142,25 +146,49 @@
     </div>
 
     <div class="btn-container">
-        <a class="btn" href="steam://connect/209.222.97.134:27017">🔄 Try joining again</a>
+        <a class="btn" href="steam://connect/209.222.97.134:27017">🔄 Redirect Join</a>
         <a class="btn" href="https://discord.gg/sCM7H5gw" target="_blank">▶ Discord</a>
         <a class="btn" href="https://www.youtube.com/channel/UCmLCJ5A_G2ziKU4ZIVryUng" target="_blank">▶ Youtube</a>
         <a class="btn" href="https://space.bilibili.com/3493137955687196" target="_blank">▶ bilibili</a>
     </div>
     
     <!-- 📢 رسالة التحميل -->
-    <div id="loading-message" class="loading-message">Joining server automatically...</div>
+    <div id="loading-message" class="loading-message">
+        Joining server automatically...<br>
+        <small>If not redirected, click the "Redirect Join" button.</small>
+    </div>
     
     <script>
-        // 🚀 إظهار رسالة التحميل ثم إخفاؤها بعد 3 ثوانٍ
-        setTimeout(() => {
-            document.getElementById("loading-message").classList.add("hidden");
-        }, 2500);
+        const joinServerBtn = document.getElementById("join-server-btn");
+        const loadingMessage = document.getElementById("loading-message");
+        
+        function joinServer() {
+            // 🔥 عرض الرسالة لمدة 3 ثوانٍ ثم إخفاؤها
+            loadingMessage.classList.add("visible");
+            setTimeout(() => {
+                loadingMessage.classList.remove("visible");
+            }, 2300);
 
-        // 🔗 إعادة التوجيه إلى خادم GMod بعد 3 ثوانٍ
-        setTimeout(() => {
-            window.location.href = "steam://connect/209.222.97.134:27017";
-        }, 1600);
+            // 🔗 محاولة إعادة التوجيه إلى خادم GMod
+            setTimeout(() => {
+                let joinLink = "steam://connect/209.222.97.134:27017";
+                let hiddenLink = document.createElement("a");
+                hiddenLink.href = joinLink;
+                document.body.appendChild(hiddenLink);
+                hiddenLink.click();
+                document.body.removeChild(hiddenLink);
+            }, 1500);
+        }
+
+        // ✅ تشغيل التوجيه التلقائي عند فتح الصفحة
+        window.onload = joinServer;
+        
+        // ✅ تشغيل التوجيه عند الضغط على زر "حاول الانضمام مجددًا"
+        joinServerBtn.addEventListener("click", (event) => {
+            event.preventDefault(); // منع التنقل العادي
+            joinServer();
+        });
+        
     </script>
 
 </body>
