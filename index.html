@@ -114,6 +114,40 @@
             opacity: 1;
             visibility: visible;
         }
+        
+        /* 📌 تصميم صورة المصغرة كزر */
+        .profile-box {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 10px var(--glow-color);
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        .profile-box:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 0px 20px var(--glow-color);
+        }
+
+        .profile-box img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+            border: 2px solid var(--glow-color);
+        }
+
+        .profile-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--text-color);
+        }
 
     </style>
 </head>
@@ -140,6 +174,16 @@
          <br>
         If not redirected, click the "Redirect Join" button.<br>
     </div>
+    
+    <!-- 👤 صورة المستخدم (زر يفتح رابط عند الضغط عليه) -->
+    <div class="profile-box" onclick="window.location.href='https://steamcommunity.com/id/AhmedMake400';">
+        <img src="ava_am4.jpg" alt="Profile Picture"> <!-- استبدل بـ الصورة الخاصة بك -->
+        <div class="profile-name">
+        AhmedMake400<br>
+        <small>> Steam</small>
+        </div>
+    </div>
+
     
     <script>
         const joinServerBtn = document.getElementById("join-server-btn");
